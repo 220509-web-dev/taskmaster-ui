@@ -25,7 +25,7 @@ function Login(props: ILoginProps) {
         setPassword((e.target as HTMLInputElement).value);
     }
 
-    let login = (e: SyntheticEvent) => {
+    let login = async (e: SyntheticEvent) => {
 
         // Prevent whatever default event logic would run otherwise (we only want our logic to run)
         e.preventDefault();
@@ -35,24 +35,42 @@ function Login(props: ILoginProps) {
         } else {
             setErrorMsg('');
         }
+        
+        try {
+            let resp = await fetch('http://localhost:8080/quizzard/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({username, password})
+            });
 
-        fetch('http://localhost:8080/quizzard/auth', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({username, password})
-        }).then(resp => {
             if (resp.status != 200) {
                 setErrorMsg('Could not validate provided credentials!');
             } else {
-                return resp.json();
+                props.setCurrentUser(await resp.json());
             }
-        }).then(data => {
-            props.setCurrentUser(data);
-        }).catch(err => {
+        } catch (err) {
             setErrorMsg('There was an error communicating with the API');
-        })
+        }
+
+        // fetch('http://localhost:8080/quizzard/auth', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({username, password})
+        // }).then(resp => {
+        //     if (resp.status != 200) {
+        //         setErrorMsg('Could not validate provided credentials!');
+        //     } else {
+        //         return resp.json();
+        //     }
+        // }).then(data => {
+        //     props.setCurrentUser(data);
+        // }).catch(err => {
+        //     setErrorMsg('There was an error communicating with the API');
+        // })
 
     }
 

@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import { User } from "../models/user";
 
 interface IDashboardProps {
@@ -7,7 +8,7 @@ interface IDashboardProps {
 function Dashboard(props: IDashboardProps) {
 
     return (
-        !props.currentUser ? <p>You are not logged in!</p> :
+        !props.currentUser ? <Navigate to="/login"/> :
         <>
             <h1>Welcome, {props.currentUser.firstName}!</h1>
         </>

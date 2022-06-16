@@ -1,5 +1,7 @@
 import { SyntheticEvent, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { User } from "../models/user";
+import ErrorMessage from "./ErrorMessage";
 
 interface ILoginProps {
     currentUser: User | undefined, // union types (this or that)
@@ -55,7 +57,7 @@ function Login(props: ILoginProps) {
     }
 
     return (
-        props.currentUser ? <p>You are already logged in!</p> : 
+        props.currentUser ? <Navigate to="/dashboard"/> : 
         <>
             <h4>Log into Taskmaster!</h4>
             <div id="login-form">
@@ -67,9 +69,7 @@ function Login(props: ILoginProps) {
                 <br/><br/>
             </div>
             { errorMsg ? 
-                <div>
-                    <p className="alert">{errorMsg}</p>
-                </div>
+                <ErrorMessage errorMessage={errorMsg}/>
                 :
                 <></>    
             }

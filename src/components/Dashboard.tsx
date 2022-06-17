@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { User } from "../models/user";
@@ -6,6 +7,14 @@ import { User } from "../models/user";
 interface IDashboardProps {
     currentUser: User | undefined
 }
+
+const columns: GridColDef[] = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'firstName', headerName: 'First name', width: 130 },
+    { field: 'lastName', headerName: 'Last name', width: 130 },
+    { field: 'email', headerName: 'Email Address', width: 130 },
+    { field: 'username', headerName: 'Username', width: 130 }
+];
 
 function Dashboard(props: IDashboardProps) {
 
@@ -27,7 +36,17 @@ function Dashboard(props: IDashboardProps) {
         <>
             <h1>Welcome, {props.currentUser.firstName}!</h1>
             <Typography variant="subtitle1">Taskmaster Users</Typography>
-            <table>
+            <div style={{height: 400, width: '100%'}}>
+                <DataGrid
+                    rows={users}
+                    columns={columns}
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                    checkboxSelection
+                />
+            </div>
+
+            {/* <table>
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -39,18 +58,18 @@ function Dashboard(props: IDashboardProps) {
                 </thead>
                 <tbody>
                 {users.map((user, idx) => {
-                return (
-                    <tr key={idx}>
-                        <td>{user.id}</td>
-                        <td>{user.firstName}</td>
-                        <td>{user.lastName}</td>
-                        <td>{user.email}</td>
-                        <td>{user.username}</td>
-                    </tr>
-                );
-            })}
+                    return (
+                        <tr key={idx}>
+                            <td>{user.id}</td>
+                            <td>{user.firstName}</td>
+                            <td>{user.lastName}</td>
+                            <td>{user.email}</td>
+                            <td>{user.username}</td>
+                        </tr>
+                    );
+                })}
                 </tbody>
-            </table>
+            </table> */}
             
         </>
     );

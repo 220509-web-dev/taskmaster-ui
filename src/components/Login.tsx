@@ -45,7 +45,7 @@ function Login(props: ILoginProps) {
                 body: JSON.stringify({username, password})
             });
 
-            if (resp.status != 200) {
+            if (resp.status !== 200) {
                 setErrorMsg('Could not validate provided credentials!');
             } else {
                 props.setCurrentUser(await resp.json());

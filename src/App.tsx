@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login currentUser={authUser} setCurrentUser={setAuthUser}/>}/>
         <Route path="/dashboard" element={<Dashboard currentUser={authUser}/>}/>
-        <Route path="/register" element={<Register />}/>
+        <Route path="/register" element={<Register currentUser={authUser}/>}/>
       </Routes>
     </BrowserRouter>
   );

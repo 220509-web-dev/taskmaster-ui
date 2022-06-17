@@ -12,8 +12,14 @@ function Navbar(props: INavbarProps) {
 
     const navigate = useNavigate();
 
-    function logout() {
-        console.log('logout not implemented yet');
+    async function logout() {
+
+        await fetch('http://localhost:8080/quizzard/auth', {
+            method: 'DELETE'
+        });
+
+        props.setCurrentUser(undefined);
+        
     }
 
     return (

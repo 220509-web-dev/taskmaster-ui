@@ -37,7 +37,7 @@ function Login(props: ILoginProps) {
         }
         
         try {
-            let resp = await fetch('http://localhost:8080/quizzard/auth', {
+            let resp = await fetch('http://taskmasterapi-env.eba-6rxd6zer.us-east-1.elasticbeanstalk.com/taskmaster/auth', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -53,24 +53,6 @@ function Login(props: ILoginProps) {
         } catch (err) {
             setErrorMsg('There was an error communicating with the API');
         }
-
-        // fetch('http://localhost:8080/quizzard/auth', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({username, password})
-        // }).then(resp => {
-        //     if (resp.status != 200) {
-        //         setErrorMsg('Could not validate provided credentials!');
-        //     } else {
-        //         return resp.json();
-        //     }
-        // }).then(data => {
-        //     props.setCurrentUser(data);
-        // }).catch(err => {
-        //     setErrorMsg('There was an error communicating with the API');
-        // })
 
     }
 

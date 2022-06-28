@@ -22,7 +22,7 @@ function Dashboard(props: IDashboardProps) {
 
     useEffect(() => {
         console.log('The Dashboard component was (re)rendered!');
-        fetch('http://localhost:8080/quizzard/users')
+        fetch('http://taskmasterapi-env.eba-6rxd6zer.us-east-1.elasticbeanstalk.com/taskmaster/users')
             .then(resp => resp.json())
             .then(data => setUsers(data as unknown as User[]));
 

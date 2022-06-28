@@ -46,7 +46,7 @@ function Register(props: IRegisterProps) {
         }
 
         try {
-            await fetch('http://localhost:5000/taskmaster', {
+            await fetch('http://taskmasterapi-env.eba-6rxd6zer.us-east-1.elasticbeanstalk.com/taskmaster/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

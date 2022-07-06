@@ -24,10 +24,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start:local": "REACT_APP_API_URL=http://localhost:5000/taskmaster react-scripts start",
+    "start:remote": "if [ -f \".env\" ]; then react-scripts start; else echo \".env does not exist, aborting app start\"; fi",
+    "build:local": "REACT_APP_API_URL=http://localhost:5000/taskmaster react-scripts build",
+    "build:remote": "if [ -f \".env\" ]; then react-scripts build; else echo \".env does not exist, aborting app start\"; fi",
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": [

@@ -12,3 +12,5 @@ export type RegisterForm = {
     username: FormField;
     password: FormField;
 }
+
+export type RegisterFormKey = keyof RegisterForm;

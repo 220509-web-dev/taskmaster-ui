@@ -4,7 +4,7 @@ import {Navigate, useNavigate} from "react-router-dom";
 import ErrorMessage from "./ErrorMessage";
 import { User } from "../models/user";
 import { css } from '@emotion/css'
-import { RegisterForm } from "../forms/types";
+import { RegisterForm, RegisterFormKey } from "../forms/types";
 import { isFormValid } from "../forms/is-valid";
 import FormBuilder from "../forms/FormBuilder";
 
@@ -28,7 +28,7 @@ function Register(props: IRegisterProps) {
 
     let handleChange = (e: any) => {
         const { name, value } = e.target;
-        setFormData({...formData, [name]: value});
+        setFormData({...formData, [name]: { ...formData[name as RegisterFormKey], value}});   
     }
 
     let register = async () => {

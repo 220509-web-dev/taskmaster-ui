@@ -1,9 +1,10 @@
 import { css } from "@emotion/css";
 import { Button, FormControl, Input, InputLabel, Typography } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { User } from "../models/user";
+import { authenticate } from "../remote/auth-service";
 import ErrorMessage from "./ErrorMessage";
 
 interface ILoginProps {
@@ -44,19 +45,23 @@ function Login(props: ILoginProps) {
         }
         
         try {
-            let resp = await fetch(`${process.env.REACT_APP_API_URL}/auth`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({username, password})
-            });
 
-            if (resp.status !== 200) {
-                setErrorMsg('Could not validate provided credentials!');
-            } else {
-                props.setCurrentUser(await resp.json());
+            let resp = await authenticate({username, password});
+
+            if (resp.status === 400) {
+                setErrorMsg('Invalid username or password provided');
             }
+
+            if (resp.status === 401) {
+                setErrorMsg('Could not authenticate using provided credentials!');
+            }
+
+            if (resp.status === 200) {
+                let authUser = resp.data;
+                props.setCurrentUser(authUser);
+                navigate('/dashboard');
+            } 
+
         } catch (err) {
             setErrorMsg('There was an error communicating with the API');
         }

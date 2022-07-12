@@ -1,9 +1,9 @@
-import {useState} from "react";
-import {Button, FormControl, Input, InputLabel, Typography} from "@mui/material";
-import {Navigate, useNavigate} from "react-router-dom";
+import { useState } from "react";
+import { Button, Typography } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 import ErrorMessage from "./ErrorMessage";
 import { User } from "../models/user";
-import { css } from '@emotion/css'
+import { css } from "@emotion/css";
 import { RegisterForm, RegisterFormKey } from "../forms/types";
 import { isFormValid } from "../forms/is-valid";
 import FormBuilder from "../forms/FormBuilder";

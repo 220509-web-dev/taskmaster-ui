@@ -6,6 +6,7 @@ phases:
       nodejs: latest
   pre_build:
     commands:
+      - aws s3 cp s3://taskmaster-resources/.env .
       - npm install
   build:
     commands:
